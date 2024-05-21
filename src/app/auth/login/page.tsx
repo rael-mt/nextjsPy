@@ -1,52 +1,66 @@
 "use client"
-import { useState } from 'react'
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/legacy/image';
-import { SignIn } from '@phosphor-icons/react/dist/ssr/SignIn';
-import { User } from '@phosphor-icons/react/dist/ssr/User';
-import { LockKey } from '@phosphor-icons/react/dist/icons/LockKey';
+import { api } from '../../utils/api';
+import { User, LockKey } from '@phosphor-icons/react';
 
 const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [attemptCount, setAttemptCount] = useState(0)
-  const router = useRouter()
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [attemptCount, setAttemptCount] = useState(0);
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (!username.trim() || !password.trim()) {
-      setError('Por favor, preencha todos os campos.')
-      return
+      setError('Por favor, preencha todos os campos.');
+      return;
     }
 
-    const isAuthenticated = username === 'usuario' && password === 'senha'
+    try {
+      const response = await fetch('http://localhost:8000/api/token/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          username,
+          password,
+        }),
+      })
 
-    if (isAuthenticated) {
+      if (!response.ok) {
+        throw new Error('Credenciais inválidas. Por favor, tente novamente.')
+      }
+
+      const data = await response.json()
+      localStorage.setItem('token', data.access_token)
       router.push('/home')
-    } else {
+    } catch (error: unknown) {
       setAttemptCount(prev => prev + 1)
       if (attemptCount >= 3) {
         setError('Sistema bloqueado por excesso de tentativas.')
       } else {
-        setError('Credenciais inválidas. Por favor, tente novamente.')
+        console.log("Error desconhecido", error)
       }
     }
   }
-
   return (
     <div className="min-h-screen flex bg-[#3f4444] items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="absolute inset-0 flex items-center justify-center">
-        <Image src="/logo.svg" sizes="100%" layout="fill" objectFit="cover" className='w-full' alt="bgLogo" />
+        <Image src="/logo.svg" sizes="100%" layout="fill" objectFit="cover" className="w-full" alt="bgLogo" />
       </div>
       <div className="max-w-md w-full space-y-8 z-10">
-        <div className='flex items-center justify-center'>
+        <div className="flex items-center justify-center">
           <Image src="/volus_frotas.svg" alt="Logo" width={233} height={100} />
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
-            <div className='flex items-baseline border-b-[3px] border-b-[#6ED761] mb-3'>
+            <div className="flex items-baseline border-b-[3px] border-b-[#6ED761] mb-3">
               <User size={22} />
               <input
                 id="username"
@@ -60,7 +74,7 @@ const LoginPage: React.FC = () => {
                 onChange={e => setUsername(e.target.value)}
               />
             </div>
-            <div className='flex items-baseline border-b-[3px] border-b-[#6ED761] mb-3'>
+            <div className="flex items-baseline border-b-[3px] border-b-[#6ED761] mb-3">
               <LockKey size={22} />
               <input
                 id="password"
@@ -83,19 +97,16 @@ const LoginPage: React.FC = () => {
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border-[3px] border-[#6ED761] text-sm font-medium rounded-md text-white bg-[#3f4444] hover:bg-[#6ED761] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
-              <SignIn size={22} />
-              <span>Entrar</span>
+              Entrar
             </button>
           </div>
-          <div className="flex justify-center mt-4">
-            <a href="/esquecisenha" className="text-sm text-gray-400 hover:text-gray-200">
-              Esqueci minha senha
-            </a>
-          </div>
         </form>
+        <div className="text-center">
+          <a href="/auth/reset-password" className="text-sm text-gray-500 hover:text-gray-400">Esqueci minha senha</a>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;
