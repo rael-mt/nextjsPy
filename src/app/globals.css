@@ -17,13 +17,13 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
+  /* color: rgb(var(--foreground-rgb)); */
+  /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
 }
 
 @layer utilities {
@@ -31,3 +31,23 @@ body {
     text-wrap: balance;
   }
 }
+
+/* styles/globals.css */
+body {
+  /* transition: background-color 0.3s, color 0.3s; */
+}
+
+.light {
+  background-color: white;
+  color: black;
+  /* --text: black; */
+}
+
+.dark {
+  --body: #3f4444;
+  --text: white; 
+  background-color: #2d2d2d;
+  color: white;
+}
+
+/* Outros estilos globais */
