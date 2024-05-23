@@ -1,9 +1,9 @@
 import React from 'react';
-import { useTheme } from '../context/ThemeContext';
+// import { useTheme } from '../context/ThemeContext';
 import { LightbulbFilament } from '@phosphor-icons/react';
 
 const Footer: React.FC = () => {
-  const { isDarkMode, toggleTheme } = useTheme();
+  // const { isDarkMode, toggleTheme } = useTheme();
 
   return (
     <footer className="bg-gray-100 dark:bg-black p-4 flex justify-between items-center">
@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
       <div className="flex items-center space-x-2">
         <span className="text-gray-600 dark:text-gray-300">Desenvolvimento Vólus</span>
         <button
-          onClick={toggleTheme}
+          // onClick={toggleTheme}
           className="text-gray-600 dark:text-gray-300 focus:outline-none"
         >
           <LightbulbFilament size={22} />

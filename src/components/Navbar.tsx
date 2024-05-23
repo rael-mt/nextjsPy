@@ -1,7 +1,8 @@
+"use client"
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Bell, User, LightbulbFilament, Bank } from '@phosphor-icons/react';
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../app/context/ThemeContext';
 import Image from 'next/legacy/image';
 import { Sun } from '@phosphor-icons/react/dist/ssr/Sun';
 
