@@ -5,6 +5,7 @@ import { Bell, User, LightbulbFilament, Bank } from '@phosphor-icons/react';
 import { useTheme } from '../app/context/ThemeContext';
 import Image from 'next/legacy/image';
 import { Sun } from '@phosphor-icons/react/dist/ssr/Sun';
+import Link from 'next/link';
 
 const Navbar: React.FC = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -59,7 +60,9 @@ const Navbar: React.FC = () => {
           </div>
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center ml-4">
-              <Image className="h-8 w-auto" width={180} height={100} src="/tes3.svg" alt="Logo" />
+              <Link href='/home'>
+                <Image className="h-8 w-auto" width={180}  height={100} src="/tes3.svg" alt="Logo" />
+              </Link>
             </div>
           </div>
         <div className="flex items-center">
