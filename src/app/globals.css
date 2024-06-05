@@ -18,15 +18,6 @@
   }
 }
 
-body {
-  /* color: rgb(var(--foreground-rgb)); */
-  /* background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb)); */
-}
 
 @layer utilities {
   .text-balance {
@@ -36,7 +27,7 @@ body {
 
 /* styles/globals.css */
 body {
-  min-width: 100%;
+  /* min-width: 100%; */
   background: var(--body);
   /* min-height: 100%; */
   /* transition: background-color 0.3s, color 0.3s; */
