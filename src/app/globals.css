@@ -6,6 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --bottom-border-input: #2d2d2d;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,6 +14,7 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+    
   }
 }
 
@@ -34,6 +36,9 @@ body {
 
 /* styles/globals.css */
 body {
+  min-width: 100%;
+  background: var(--body);
+  /* min-height: 100%; */
   /* transition: background-color 0.3s, color 0.3s; */
 }
 
@@ -45,9 +50,40 @@ body {
 
 .dark {
   --body: #3f4444;
-  --text: white; 
-  background-color: #2d2d2d;
+  --text: white;
+  --black: black;
+  /* background-color: #2d2d2d; */
   color: white;
+  --bottom-border-input: #77C26D;
+ 
 }
 
 /* Outros estilos globais */
+.input-focus {
+  background: transparent;
+  border-bottom-color: black;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  color: black;
+}
+
+.input-focus:active, .input-focus:focus {
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  background: transparent;
+  border-bottom-color: #77C26D;
+  color: #77C26D;
+}
+
+.bg-button {
+  background: #3F4444 !important;
+  color: #FFF;
+  border-radius: 8px !important;
+  border: 1px solid var(--bottom-border-input);
+}
+/* #2a2e30 */
+.bg-button:hover {
+  background-color:#77C26D !important;
+}
