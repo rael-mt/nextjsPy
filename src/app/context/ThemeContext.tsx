@@ -11,7 +11,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
     // Verificar o valor armazenado no localStorage
-    const storedTheme = localStorage.getItem('isDarkMode');
+    const storedTheme = window.localStorage.getItem('isDarkMode');
     return storedTheme === 'true';
   });
 

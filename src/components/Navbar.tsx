@@ -13,8 +13,8 @@ const Navbar: React.FC = () => {
   const router = useRouter();
 
   const handleLogout = () => {
-    localStorage.removeItem('accessToken');
-    router.push('/auth/login');
+    localStorage.removeItem('token');
+    router.push('/login');
   };
 
   return (
@@ -50,7 +50,10 @@ const Navbar: React.FC = () => {
                 className="text-gray-500 inline-flex items-center px-1 pt-1 text-sm font-medium"
               >
                 <Sun size={22} className="mr-2" />
-                {isDarkMode ? 'Modo Light' : 'Modo Dark'}
+                {/* {isDarkMode ? 'Modo Light' : 'Modo Dark'} */}
+                {isDarkMode && 'Modo Dark'}
+                {!isDarkMode && 'Modo Light'}
+                
               </button>
             </div>
           </div>
