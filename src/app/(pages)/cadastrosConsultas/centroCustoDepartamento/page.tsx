@@ -40,7 +40,7 @@ const Departamento: React.FC = () => {
   };
 
   return (
-    <div className='block left-20 relative bg-white dark:bg-[--body]'>
+    <div className='block left-24 relative bg-white dark:bg-[--body]'>
       <div className="flex justify-start text-[36px] font-semibold my-8 top-6 bg-white dark:bg-[--body] w-full h-14 ">
         <span className="flex justify-start items-center text-[#77C26D] text-center w-[428px] rounded-lg shadow-[0px 4px 10px 0px #C5C5C5]">
           Consulta Departamento
