@@ -47,12 +47,12 @@ const Departamento: React.FC = () => {
         </span>
       </div>
       <div className="flex gap-4 mb-4">
-        <div className="inline-flex gap-6 bg-white w-full h-36 rounded-lg">
-          <div className="bg-white w-[30rem] h-[5rem] rounded-lg">
+        <div className="inline-flex gap-6 bg-white dark:bg-[--body] w-full h-36 rounded-lg">
+          <div className="bg-white dark:bg-[--body] w-[30rem] h-[5rem] rounded-lg">
             <label className='block text-xl' htmlFor="centro_custo">Centro de Custo</label>
             <select
               id="centroCusto"
-              className='border-b border-black w-[29.93rem] h-[2.5rem]'
+              className='input-focus border dark:border-b-white dark:text-white w-[29.93rem] h-[2.5rem]'
               onChange={(e) => setSelectedCentroCusto(Number(e.target.value))}
             >
               <option value="">Todos</option>
@@ -61,11 +61,11 @@ const Departamento: React.FC = () => {
               ))}
             </select>
           </div>
-          <div className="bg-white w-[30rem] h-[5rem] rounded-lg"> 
+          <div className="bg-white dark:bg-[--body] w-[30rem] h-[5rem] rounded-lg"> 
             <label className='block text-xl' htmlFor="custo_departamento">Departamento</label>
             <select
               id="departamento"
-              className='border-b border-black w-[29.93rem] h-[2.5rem]'
+              className='input-focus border dark:border-b-white dark:text-white w-[29.93rem] h-[2.5rem]'
               onChange={(e) => setSelectedDepartamento(Number(e.target.value))}
             >
               <option value="">Todos</option>
@@ -76,7 +76,7 @@ const Departamento: React.FC = () => {
           </div>
           <div className="relative top-[30px]">
             <button
-              className='flex items-center px-4 py-2 bg-[#3F4444] text-white rounded hover:bg-green-500'
+              className='flex items-center px-4 py-2 bg-button'
               onClick={handleConsulta}
             >
               <span>Consultar</span>
@@ -126,10 +126,10 @@ const Departamento: React.FC = () => {
         )}
       </div>
       <div className='mt-4 flex justify-end gap-2 relative right-40'>
-        <button className='px-4 py-2 bg-[#3F4444] text-white rounded hover:bg-green-500'>+ Importação</button>
-        <button className='px-4 py-2 bg-[#3F4444] text-white rounded hover:bg-green-500'>Gerar Relatório</button>
-        <button className='px-4 py-2 bg-[#3F4444] text-white rounded hover:bg-green-500'>+ Cadastrar Centro Custo</button>
-        <button className='px-4 py-2 bg-[#3F4444] text-white rounded hover:bg-green-500'>+ Cadastrar Departamento</button>
+        <button className='bg-button px-4 py-2'>+ Importação</button>
+        <button className='bg-button px-4 py-2'>Gerar Relatório</button>
+        <button className='bg-button px-4 py-2'>+ Cadastrar Centro Custo</button>
+        <button className='bg-button px-4 py-2'>+ Cadastrar Departamento</button>
       </div>
     </div>
   );

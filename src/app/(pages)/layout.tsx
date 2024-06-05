@@ -7,7 +7,7 @@ export default function PageComponent({ children }: { children: React.ReactNode 
   return (
     <>
       <ThemeProvider>
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-full bg-white dark:bg-[#3f4444]">
           <Navbar />
           <div className="flex flex-grow">
             <Sidebar />
@@ -16,6 +16,7 @@ export default function PageComponent({ children }: { children: React.ReactNode 
           
         </div>
       </ThemeProvider>
+
     </>
   )
 }
