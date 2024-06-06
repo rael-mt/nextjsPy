@@ -18,19 +18,19 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="dark:bg-black bg-white">
+    <nav className="bg-white dark:bg-black">
       <div className="w-full flex justify-between mx-auto px-4 sm:px-6 lg:px-8">
         <div className="w-full flex justify-between h-16">
           <div className="flex items-center">
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <a href="#" className="text-gray-500 inline-flex items-center px-1 pt-1 text-sm font-medium">
+              <a href="#" className="text-gray-500 dark:text-white inline-flex items-center px-1 pt-1 text-sm font-medium">
                 <span className="ml-2"><LightbulbFilament size={22} /></span> Acesso Rápido
               </a>
             </div>
             <div className="relative">
               <button
                 onClick={() => setGroupDropdownOpen(!isGroupDropdownOpen)}
-                className="text-gray-500 inline-flex items-center px-1 pt-1 text-sm font-medium"
+                className="text-gray-500 dark:text-white inline-flex items-center px-1 pt-1 text-sm font-medium"
               >
                 <Bank size={22} className="mr-2" />
                 Empresas do Grupo
@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
               )}
               <button
                 onClick={toggleTheme}
-                className="text-gray-500 inline-flex items-center px-1 pt-1 text-sm font-medium"
+                className="text-gray-500 dark:text-white inline-flex items-center px-1 pt-1 text-sm font-medium"
               >
                 <Sun size={22} className="mr-2" />
                 {/* {isDarkMode ? 'Modo Light' : 'Modo Dark'} */}
@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center">
-            <button className="p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out">
+            <button className="p-1 rounded-full text-gray-400 dark:text-white hover:text-gray-500 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out">
               <span className="sr-only">View notifications</span>
               <Bell size={24} />
             </button>
@@ -75,7 +75,7 @@ const Navbar: React.FC = () => {
                 className="text-white focus:outline-none"
               >
                 <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">frotas</span>
+                  <span className="text-gray-500 dark:text-white">frotas</span>
                   <User size={24} />
                 </div>
               </button>
