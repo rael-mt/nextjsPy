@@ -7,6 +7,7 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
   --bottom-border-input: #2d2d2d;
+  --prymari-green: #77C26D;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -46,6 +47,7 @@ body {
   /* background-color: #2d2d2d; */
   color: white;
   --bottom-border-input: #77C26D;
+  --prymari-green: #77C26D;
  
 }
 
