@@ -1,4 +1,4 @@
-export const APP_KEY = 'token';
+export const APP_KEY = 'accessToken';
 
 export function getStorageItem(key: string) {
   if (typeof window === 'undefined') return;
@@ -9,7 +9,6 @@ export function getStorageItem(key: string) {
     token: data
   }
   const keyData = JSON.stringify(tokenObjto)
-  console.log('data', keyData)
   return keyData!
 }
 

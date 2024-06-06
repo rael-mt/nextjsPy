@@ -3,8 +3,7 @@ import { getStorageItem } from '@/utils'
 
 export const checkUserAuthenticated = () => {
                                                    
-    const userToken = getStorageItem('token');
-    console.log('userToken', userToken)
+    const userToken = getStorageItem('accessToken');
     
     return !!userToken;
 }
