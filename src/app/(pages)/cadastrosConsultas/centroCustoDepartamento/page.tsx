@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { ICentroCusto, IDepartamento } from './type';
+import DepartmentModal from '@/components/Modal/DepartmentModal';
 
 const Departamento: React.FC = () => {
   const [departamentos, setDepartamentos] = useState<IDepartamento[]>([]);
@@ -8,6 +9,9 @@ const Departamento: React.FC = () => {
   const [selectedCentroCusto, setSelectedCentroCusto] = useState<number | null>(null);
   const [selectedDepartamento, setSelectedDepartamento] = useState<number | null>(null);
   const [centroCustoOpen, setCentroCustoOpen] = useState<number | null>(null);
+  const [consultaFeita, setConsultaFeita] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentDepartment, setCurrentDepartment] = useState<IDepartamento | null>(null);
 
   useEffect(() => {
     const fetchCentrosCusto = async () => {
@@ -34,8 +38,32 @@ const Departamento: React.FC = () => {
       const response = await fetch(url);
       const data = await response.json();
       setDepartamentos(Array.isArray(data) ? data : []);
+      setConsultaFeita(true); // Define que a consulta foi feita
     } catch (error) {
       console.error('Erro ao buscar departamentos:', error);
+    }
+  };
+  const handleDepartmentClick = (department: IDepartamento) => {
+    setCurrentDepartment(department);
+    setIsModalOpen(true);
+  };
+
+  const handleCentroCustoChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const centroCustoId = Number(e.target.value) || null;
+    setSelectedCentroCusto(centroCustoId);
+    setSelectedDepartamento(null);
+    setConsultaFeita(false); // Resetar consulta ao mudar centro de custo
+
+    if (centroCustoId !== null) {
+      try {
+        const response = await fetch(`http://localhost:8000/api/departamentos/centro-custo/${centroCustoId}`);
+        const data = await response.json();
+        setDepartamentos(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error('Erro ao buscar departamentos:', error);
+      }
+    } else {
+      setDepartamentos([]);
     }
   };
 
@@ -53,11 +81,11 @@ const Departamento: React.FC = () => {
             <select
               id="centroCusto"
               className='input-focus border dark:border-b-white dark:text-white w-[29.93rem] h-[2.5rem]'
-              onChange={(e) => setSelectedCentroCusto(Number(e.target.value))}
+              onChange={handleCentroCustoChange}
             >
-              <option value="">Todos</option>
+              <option className='dark:bg-[--body]' value="">Todos</option>
               {centrosCusto.map((centro) => (
-                <option key={centro.codigo} value={centro.codigo}>{centro.descricao}</option>
+                <option className='dark:bg-[--body]' key={centro.codigo} value={centro.codigo}>{centro.descricao}</option>
               ))}
             </select>
           </div>
@@ -66,11 +94,12 @@ const Departamento: React.FC = () => {
             <select
               id="departamento"
               className='input-focus border dark:border-b-white dark:text-white w-[29.93rem] h-[2.5rem]'
-              onChange={(e) => setSelectedDepartamento(Number(e.target.value))}
+              onChange={(e) => setSelectedDepartamento(Number(e.target.value) || null)}
+              value={selectedDepartamento || ''}
             >
-              <option value="">Todos</option>
-              {Array.isArray(departamentos) && departamentos.map((departamento) => (
-                <option key={departamento.codigo} value={departamento.codigo}>{departamento.departamento}</option>
+              <option className='dark:bg-[--body]' value="">Todos</option>
+              {departamentos.map((departamento) => (
+                <option className='dark:bg-[--body]' key={departamento.codigo} value={departamento.codigo}>{departamento.departamento}</option>
               ))}
             </select>
           </div>
@@ -85,7 +114,7 @@ const Departamento: React.FC = () => {
         </div>
       </div>
       <div className='w-[93%]'>
-        {Array.isArray(departamentos) && departamentos.length > 0 && (
+        {consultaFeita && (
           <div className="accordion">
             {centrosCusto
               .filter((centro) => 
@@ -110,9 +139,12 @@ const Departamento: React.FC = () => {
                       </thead>
                       <tbody className='bg-white divide-y divide-gray-200'>
                         {departamentos
-                          .filter((departamento) => departamento.codigo_centro_custo === centro.codigo)
+                          .filter((departamento) =>
+                            departamento.codigo_centro_custo === centro.codigo &&
+                            (selectedDepartamento === null || departamento.codigo === selectedDepartamento)
+                          )
                           .map((departamento) => (
-                            <tr key={departamento.codigo}>
+                            <tr key={departamento.codigo} onClick={() => handleDepartmentClick(departamento)}>
                               <td className='px-6 py-4 whitespace-nowrap'>{departamento.departamento}</td>
                               <td className='px-6 py-4 whitespace-nowrap'>{departamento.codigo}</td>
                             </tr>
@@ -131,6 +163,13 @@ const Departamento: React.FC = () => {
         <button className='bg-button px-4 py-2'>+ Cadastrar Centro Custo</button>
         <button className='bg-button px-4 py-2'>+ Cadastrar Departamento</button>
       </div>
+      {currentDepartment && (
+        <DepartmentModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          department={currentDepartment}
+        />
+      )}
     </div>
   );
 };

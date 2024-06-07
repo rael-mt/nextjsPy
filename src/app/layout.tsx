@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname()
   const isPublicpage = checkIsPublicRoute(pathname!)
-  console.log(isPublicpage)
+
   return (
     <html lang="en">
       <ThemeProvider>
