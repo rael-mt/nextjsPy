@@ -5,6 +5,7 @@ import Image from 'next/legacy/image';
 import { User, LockKey } from '@phosphor-icons/react';
 import { login } from '@/app/api/token/auth';
 
+
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');

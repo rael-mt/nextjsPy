@@ -1,10 +1,30 @@
 "use client"
+import { Fragment } from 'react';
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Transition,
+} from '@headlessui/react'
+import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Bell, User, LightbulbFilament, Bank, Sun } from '@phosphor-icons/react';
 import { useTheme } from '../app/context/ThemeContext';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
+
+
+
+const navigation = [
+  { name: 'Dashboard', href: '/dashboard', current: false },
+  { name: 'Empresas', href: '/empresas', current: false },
+  { name: 'Usuários', href: '/usuarios', current: false },
+]
 
 const Navbar: React.FC = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -13,12 +33,12 @@ const Navbar: React.FC = () => {
   const router = useRouter();
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('accessToken');
     router.push('/login');
   };
 
   return (
-    <nav className="bg-white dark:bg-black">
+    <nav className=" bg-white dark:bg-black relative left-5">
       <div className="w-full flex justify-between mx-auto px-4 sm:px-6 lg:px-8">
         <div className="w-full flex justify-between h-16">
           <div className="flex items-center">
