@@ -129,15 +129,15 @@ const Departamento: React.FC = () => {
                   >
                     {centro.descricao}
                   </button>
-                  <div className={`accordion-body ${centroCustoOpen === centro.codigo ? 'block' : 'hidden'} bg-green-100 py-2 px-4`}>
-                    <table className='min-w-full divide-y divide-gray-200'>
+                  <div className={`accordion-body ${centroCustoOpen === centro.codigo ? 'block' : 'hidden'} bg-gray-500 py-2 px-4`}>
+                    <table className='min-w-full divide-y '>
                       <thead>
                         <tr>
-                          <th className='px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>Departamento</th>
-                          <th className='px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>Número Departamento</th>
+                          <th className='px-6 py-3 bg-[--body] text-left text-xs font-medium text-[#77C26D] uppercase tracking-wider rounded-s-2xl'>Departamento</th>
+                          <th className='px-6 py-3 bg-[--body] text-left text-xs font-medium text-[#77C26D] uppercase tracking-wider rounded-e-2xl'>Número Departamento</th>
                         </tr>
                       </thead>
-                      <tbody className='bg-white divide-y divide-gray-200'>
+                      <tbody className='bg-[--body] divide-y '>
                         {departamentos
                           .filter((departamento) =>
                             departamento.codigo_centro_custo === centro.codigo &&
@@ -145,8 +145,8 @@ const Departamento: React.FC = () => {
                           )
                           .map((departamento) => (
                             <tr key={departamento.codigo} onClick={() => handleDepartmentClick(departamento)}>
-                              <td className='px-6 py-4 whitespace-nowrap'>{departamento.departamento}</td>
-                              <td className='px-6 py-4 whitespace-nowrap'>{departamento.codigo}</td>
+                              <td className='px-6 py-3 text-xs whitespace-nowrap rounded-s-2xl'>{departamento.departamento}</td>
+                              <td className='px-6 py-3 text-xs whitespace-nowrap rounded-e-2xl'>{departamento.codigo}</td>
                             </tr>
                           ))}
                       </tbody>
