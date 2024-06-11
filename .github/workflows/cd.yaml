@@ -31,6 +31,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ${{ secrets.DOCKER_USERNAME }}/nextjs
+
         tags: ${{ github.sha }}, latest
 
     - name: Setup Kustomize
@@ -43,7 +44,7 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: |
         cd k8s
-        kustomize edit set image jsserver=$DOCKER_USERNAME/nextjsPy:$GITHUB_SHA
+        kustomize edit set image nextserver=$DOCKER_USERNAME/nextjs:$GITHUB_SHA
 
     - name: Commit
       run: |
