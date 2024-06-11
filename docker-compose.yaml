@@ -11,7 +11,8 @@ services:
       - node-network
     depends_on:
       app:
-       condition: service_healthy
+        condition: service_healthy
+
   app:
     build:
       context: .
@@ -20,8 +21,8 @@ services:
     networks:
       - node-network
     volumes:
-      - ./node:/app
-      - /app/node_modules
+      - ./src:/app  # Caminho no host -> Caminho absoluto no contêiner
+      - /app/node_modules  # Caminho absoluto no contêiner => ->
     tty: true
     healthcheck:
       test: ["CMD", "curl", "http://localhost:3000/"]
@@ -29,6 +30,6 @@ services:
       timeout: 30s
       retries: 6
 
-networks: 
+networks:
   node-network:
-    driver: bridge     
+    driver: bridge
