@@ -9,6 +9,6 @@ export const APP_ROUTER = {
     },
     public: {
         login: '/login',
-        forget_password: '/login'
+        forget_password: '/auth/reset-password'
     }
 }
