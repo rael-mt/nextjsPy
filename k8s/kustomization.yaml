@@ -6,6 +6,9 @@ resources:
 - service.yaml
 
 images:
+- name: jsserver
+  newName: raelmartins44/nextjsPy
+  newTag: 6b0d24c1a679ee53dd3ab0e7f7b8f8724fdcc2fe
 - name: nextserver
   newName: raelmartins44/nextjsPy
   newTag: latest
