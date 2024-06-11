@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextserver
+spec:
+  selector:
+    matchLabels:
+      app: nextserver
+  template:
+    metadata:
+      labels:
+        app: nextserver
+    spec:
+      containers:
+      - name: nextserver
+        image: nextserver
+        ports:
+        - containerPort: 3000
