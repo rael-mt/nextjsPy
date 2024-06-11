@@ -10,5 +10,5 @@ images:
   newName: raelmartins44/nextjsPy
   newTag: ad9e0d8c02ed1904f0d7d97c5f213561b6d7cbc0
 - name: nextserver
-  newName: raelmartins44/nextjsPy
-  newTag: latest
+  newName: raelmartins44/nextjs
+  newTag: 62e4afae40794421bc6864e56a8944cb89d38369
