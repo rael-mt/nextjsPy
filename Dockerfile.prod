@@ -1,0 +1,11 @@
+From node:20.14.0
+
+WORKDIR /app
+
+COPY ./node/package.json .
+
+RUN npm i --omit=dev
+
+COPY . .
+
+CMD [ "npm", "run", "dev" ]
