@@ -8,7 +8,7 @@ services:
     container_name: nginx
     tty: true
     ports:
-      - 8080:80
+      - 80:80
     networks:
       - node-network
     depends_on:
