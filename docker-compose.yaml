@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   nginx:
     build:
@@ -21,8 +23,8 @@ services:
     networks:
       - node-network
     volumes:
-      - ./src:/app  # Caminho no host -> Caminho absoluto no contêiner
-      - /app/node_modules  # Caminho absoluto no contêiner => ->
+      - ./src:/usr/src/app/src
+      - /usr/src/app/node_modules
     tty: true
     healthcheck:
       test: ["CMD", "curl", "http://localhost:3000/"]
