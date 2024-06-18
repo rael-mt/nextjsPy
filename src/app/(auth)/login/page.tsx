@@ -2,14 +2,15 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/legacy/image';
-import { api } from '../../utils/api';
 import { User, LockKey } from '@phosphor-icons/react';
+import { login } from '@/app/api/token/auth';
+
 
 const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [attemptCount, setAttemptCount] = useState(0);
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const [attemptCount, setAttemptCount] = useState<number>(0);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,33 +22,18 @@ const LoginPage: React.FC = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/token/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-          username,
-          password,
-        }),
-      })
-
-      if (!response.ok) {
-        throw new Error('Credenciais inválidas. Por favor, tente novamente.')
-      }
-
-      const data = await response.json()
-      localStorage.setItem('token', data.access_token)
-      router.push('/home')
-    } catch (error: unknown) {
-      setAttemptCount(prev => prev + 1)
+      await login(username, password);
+      router.push('/home');
+    } catch (error) {
+      setAttemptCount(prev => prev + 1);
       if (attemptCount >= 3) {
-        setError('Sistema bloqueado por excesso de tentativas.')
+        setError('Sistema bloqueado por excesso de tentativas.');
       } else {
-        console.log("Error desconhecido", error)
+        setError('Credenciais inválidas. Por favor, tente novamente.');
       }
     }
-  }
+  };
+
   return (
     <div className="min-h-screen flex bg-[#3f4444] items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="absolute inset-0 flex items-center justify-center">

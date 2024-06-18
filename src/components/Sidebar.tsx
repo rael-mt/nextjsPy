@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { menuItems } from '../app/utils/menuItems';
@@ -28,7 +29,7 @@ const Sidebar: React.FC = () => {
     <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`bg-black text-white h-full fixed top-0 left-0 z-40 transition-all duration-300 ease-in-out ${isExpanded ? 'w-64' : 'w-16'}`}
+      className={`bg-[#3F4444] dark:bg-black text-white h-full fixed top-0 left-0 z-40 transition-all duration-200 ease-in-out ${isExpanded ? 'w-64' : 'w-16'}`}
     >
       <div className="flex items-center justify-center h-16">
         <span className="text-xl font-bold">{isExpanded ? 'Vólus' : 'V'}</span>
@@ -37,7 +38,7 @@ const Sidebar: React.FC = () => {
         {menuItems.map((menu, index) => (
           <li key={index} className="flex flex-col">
             <div
-              className="flex items-center justify-between px-4 py-2 hover:bg-gray-700 cursor-pointer"
+              className="flex items-center justify-between px-4 py-2  hover:bg-gray-400 hover:text-[--prymari-green] cursor-pointer hover:bg-opacity-5"
               onClick={() => handleMenuClick(menu.title)}
             >
               <div className="flex items-center space-x-2">

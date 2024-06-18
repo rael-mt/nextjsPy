@@ -1,0 +1,23 @@
+# Use a base image
+FROM node:20.14.0
+
+# Set the working directory
+WORKDIR /usr/src/app
+
+# Copy the package.json and package-lock.json from the root of the project
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install --omit=dev
+
+# Copy the rest of the application
+COPY . .
+
+# Verify files have been copied correctly
+RUN ls -al /usr/src/app
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Command to run the app
+CMD ["npm", "run", "dev"]

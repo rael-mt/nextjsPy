@@ -1,7 +1,6 @@
 "use client"
 import { useRouter } from 'next/navigation';
-import Layout from '../../components/Layout';
-import { ThemeProvider } from '../context/ThemeContext';
+import { ThemeProvider } from '../../context/ThemeContext';
 
 const HomePage: React.FC = () => {
   const router = useRouter()

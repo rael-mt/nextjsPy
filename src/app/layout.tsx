@@ -1,10 +1,10 @@
-"use client";
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import { usePathname } from "next/navigation";
+"use client"
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/app/context/ThemeContext";
-import Layout from "@/components/Layout";
+import { ThemeProvider } from "./context/ThemeContext";
+import { usePathname } from "next/navigation";
+import { checkIsPublicRoute } from "@/functions/check-is-public-route";
+import PrivateRoute from "@/components/PrivateRoute";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,22 +13,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-  const isAuthPage = pathname && pathname.startsWith("/auth");
+  const pathname = usePathname()
+  const isPublicpage = checkIsPublicRoute(pathname!)
 
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <ThemeProvider>
-          {isAuthPage ? (
-            children
-          ) : (
-            <Layout>
-              {children}
-            </Layout>
-          )}
-        </ThemeProvider>
-      </body>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      </head>
+      <ThemeProvider>
+        <body className={`${inter.className}`}>
+          {isPublicpage && children}
+          {!isPublicpage && <PrivateRoute>{children}</PrivateRoute>}
+        </body>
+      </ThemeProvider>
     </html>
   );
 }
